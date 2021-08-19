@@ -1,0 +1,25 @@
+<h4>Your Current City : <b style="color: red;">{{city}}</b></h4>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col" [class.buff_Sala]="buff_Sala === 'Fajr'">Fajr</th>
+            <th scope="col" [class.buff_Sala]="buff_Sala === 'Dhuhr'">Dhuhr</th>
+            <th scope="col" [class.buff_Sala]="buff_Sala === 'Asr'">Asr</th>
+            <th scope="col" [class.buff_Sala]="buff_Sala === 'Maghrib'">Maghrib</th>
+            <th scope="col" [class.buff_Sala]="buff_Sala === 'Isha'">Isha</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="data">
+            <td [class.buff_Sala]="buff_Sala === 'Fajr'">{{data.Fajr}}</td>
+            <td [class.buff_Sala]="buff_Sala === 'Dhuhr'">{{data.Dhuhr}}</td>
+            <td [class.buff_Sala]="buff_Sala === 'Asr'">{{data.Asr}}</td>
+            <td [class.buff_Sala]="buff_Sala === 'Maghrib'">{{data.Maghrib}}</td>
+            <td [class.buff_Sala]="buff_Sala === 'Isha'">{{data.Isha}}</td>
+
+        </tr>
+
+    </tbody>
+</table>
+
+<h4>Remaining time to <b>{{this.buff_Sala}}</b> is <b style="color: red;">{{remaning_total_time}}</b></h4>
