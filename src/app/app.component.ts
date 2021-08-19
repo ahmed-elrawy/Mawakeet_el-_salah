@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
 
 
 
-  result:string[] | undefined
 ngOnInit()  
   {  
     
@@ -38,7 +37,6 @@ ngOnInit()
   {  
     this.ip.getRegion().subscribe((res:any)=>{  
       this.city = res.city
-      console.log(this.curr_date)
       this.ip.getMawkeet(this.city, this.curr_date).subscribe((res:any)=>{  
         this.data = res.results.datetime[0].times
         this.getNearst()
@@ -67,31 +65,16 @@ ngOnInit()
 
           buff_time =arr[key]-this.curr_time
           this.buff_Sala = key
-
         }
-
-       
-      } else {
-            if (this.curr_time > arr.Isha && arr[key]-this.curr_time +24 <buff_time ) {
-
-              if(arr[key]-this.curr_time + 24 <buff_time){
-
-                buff_time =arr[key]-this.curr_time
-                this.buff_Sala = key
-      
-              }
-
-             
-              
-            }
-          
-
-      }
-    
-     
-       //this.getRemainingTime(arr)
-
-  
+      } else 
+       {
+        if (this.curr_time > arr.Isha && arr[key]-this.curr_time +24 <buff_time ) {
+          if(arr[key]-this.curr_time + 24 <buff_time){
+            buff_time =arr[key]-this.curr_time
+            this.buff_Sala = key
+        } 
+        }
+      }  
     }
 
     this.getRemainingTime(arr)
@@ -104,57 +87,39 @@ ngOnInit()
 getRemainingTime(arr: { [x: string]: number; }){
   let remaining_h = 0
   let remaining_m = 0
-  let curr_time_hour: number
-  let curr_time_min: number
-  let next_salah_hour: number
-  let next_salah_min: number
-  if (this.curr_time <(arr[this.buff_Sala!]+12)){ 
-    next_salah_hour = Math.floor(arr[this.buff_Sala!])
-    next_salah_min = Math.floor(+(arr[this.buff_Sala!] - Math.floor(arr[this.buff_Sala!])).toFixed(2)*100)
-    
-     
+  let curr_time_hour: number  = Math.floor(this.curr_time) 
+  let curr_time_min: number = Math.floor(+(this.curr_time - Math.floor(this.curr_time)).toFixed(2)*100)
+  let next_salah_hour: number = Math.floor(arr[this.buff_Sala!])
+  let next_salah_min: number = Math.floor(+(arr[this.buff_Sala!] - Math.floor(arr[this.buff_Sala!])).toFixed(2)*100)
 
-    curr_time_hour = Math.floor(this.curr_time)
-    curr_time_min =  Math.floor(+(this.curr_time - Math.floor(this.curr_time)).toFixed(2)*100)
+  if (this.curr_time <(arr[this.buff_Sala!]+12))
+  { 
     remaining_h = ((next_salah_hour-curr_time_hour)-1)*60
     remaining_m = (60 - curr_time_min) + next_salah_min
 
-    if((remaining_h+remaining_m) >= 60 ){
+    if((remaining_h+remaining_m) >= 60 )
+    {
       this.remaning_total_time =`${Math.floor((remaining_h+remaining_m)/60)}h:${(remaining_h+remaining_m)%60}m `
-      console.log(this.remaning_total_time)
-    }else{
+    }else
+    {
       this.remaning_total_time = `${(remaining_h+remaining_m)}m`
-      console.log(this.remaning_total_time)
-
     }
-  }else {
+   
+  }
+  
+  
+  
+  
+  else {
 
-    next_salah_hour = Math.floor(arr[this.buff_Sala!])
-    next_salah_min = Math.floor(+(arr[this.buff_Sala!] - Math.floor(arr[this.buff_Sala!])).toFixed(2)*100)
-    
-     
+    remaining_h = (24- Math.floor(this.curr_time) + Math.floor(arr[this.buff_Sala!])) * 60
 
-    // curr_time_hour =24- Math.floor(this.curr_time) + Math.floor(arr[this.buff_Sala!])
-    curr_time_hour = Math.floor(this.curr_time)
-
-    console.log(curr_time_hour)
-    curr_time_min =  Math.floor(+(this.curr_time - Math.floor(this.curr_time)).toFixed(2)*100)
-    console.log(curr_time_min)
-
-    remaining_h = 24- Math.floor(this.curr_time) + Math.floor(arr[this.buff_Sala!]) * 60
-    console.log(remaining_h)
-
-    remaining_m = (60 - curr_time_min) + next_salah_min
-    console.log(remaining_h +remaining_m)
-
-
-    if((remaining_h+remaining_m) >= 60 ){
+    if((remaining_h+remaining_m) >= 60 )
+    {
       this.remaning_total_time =`${Math.floor((remaining_h+remaining_m)/60)}h:${(remaining_h+remaining_m)%60}m `
-      console.log(this.remaning_total_time)
-    }else{
+    }else
+    {
       this.remaning_total_time = `${(remaining_h+remaining_m)}m`
-      console.log(this.remaning_total_time)
-
     }
    
   
