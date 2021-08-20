@@ -24,4 +24,9 @@ export class IpServiceService  {
     return this.http.get(`https://api.pray.zone/v2/times/day.json?city=${city}&date=${date}`); 
     
   } 
+
+
+  public getMawkeetByIP(){
+    return this.http.get(`https://api.pray.zone/v2/times/this_week.json?ip=163.172.18.192`)
+  }
 }  
