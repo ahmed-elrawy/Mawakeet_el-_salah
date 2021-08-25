@@ -20,8 +20,12 @@ export class IpServiceService  {
   }  
 
   public getMawkeet(city: string, date: string)  
-  {  
-    return this.http.get(`https://api.pray.zone/v2/times/day.json?city=${city}&date=${date}`); 
+
+  
+  {
+    return this.http.get(`https://api.pray.zone/v2/times/today.json?city=${city}`)
+  
+    // return this.http.get(`https://api.pray.zone/v2/times/day.json?city=${city}&date=${date}`); 
     
   } 
 

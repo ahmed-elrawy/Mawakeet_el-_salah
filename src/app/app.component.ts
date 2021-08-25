@@ -114,8 +114,7 @@ getRemainingTime(arr: { [x: string]: number; }){
 
     if((remaining_h+remaining_m) >= 60 )
     {
-      console.log(remaining_m)
-      this.remaning_total_time =`${Math.floor((remaining_h+remaining_m)/60)}h:${(remaining_h+remaining_m)%60}m `
+      this.remaning_total_time =`${Math.floor((remaining_h+remaining_m)/60)-1}h:${(remaining_h+remaining_m)%60}m `
     }else
     {
       this.remaning_total_time = `${(remaining_h+remaining_m)}m`
